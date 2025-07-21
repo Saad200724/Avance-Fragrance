@@ -81,46 +81,46 @@ export default function Home() {
                backgroundImage: "url('https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
              }}></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="text-center lg:text-left animate-fade-in-up">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-4 sm:mb-6 leading-tight">
-                <span className="text-gold animate-shimmer">INTRODUCING</span><br />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-6 leading-tight">
+                <span className="text-gold">INTRODUCING</span><br />
                 <span className="text-white">AVA 2025</span>
               </h1>
-              <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                 Avancé's newest addition is ready to step into your Collection. Uncover the art of scent with Avancé — your destination for fragrance trends, signature tips, and elevated luxury.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-6 sm:mb-8 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link href="/products">
-                  <Button className="bg-gold text-black px-6 sm:px-8 py-3 hover:bg-gold/90 font-semibold w-full sm:w-auto">
+                  <Button className="bg-gold text-black px-8 py-3 hover:bg-gold/90 font-semibold">
                     Shop Collection
                   </Button>
                 </Link>
                 <Button
                   variant="outline"
-                  className="border-gold text-gold px-6 sm:px-8 py-3 hover:bg-gold hover:text-black font-semibold w-full sm:w-auto"
+                  className="border-gold text-gold px-8 py-3 hover:bg-gold hover:text-black font-semibold"
                 >
                   Learn More
                 </Button>
               </div>
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6 lg:space-x-8">
+              <div className="flex items-center space-x-8">
                 <div className="flex items-center space-x-2">
-                  <Star className="h-4 w-4 sm:h-5 sm:w-5 text-gold" />
-                  <span className="text-xs sm:text-sm text-gray-300">High longevity</span>
+                  <Star className="h-5 w-5 text-gold" />
+                  <span className="text-sm text-gray-300">High longevity</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-gold" />
-                  <span className="text-xs sm:text-sm text-gray-300">Perfect Protection</span>
+                  <Shield className="h-5 w-5 text-gold" />
+                  <span className="text-sm text-gray-300">Perfect Protection</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Gem className="h-4 w-4 sm:h-5 sm:w-5 text-gold" />
-                  <span className="text-xs sm:text-sm text-gray-300">Remarkable Fragrances</span>
+                  <Gem className="h-5 w-5 text-gold" />
+                  <span className="text-sm text-gray-300">Remarkable Fragrances</span>
                 </div>
               </div>
             </div>
-            <div className="relative mt-8 lg:mt-0 animate-slide-in-right">
-              <div className="relative luxury-shadow max-w-md mx-auto lg:max-w-none transform hover:scale-105 transition-transform duration-500">
+            <div className="relative">
+              <div className="relative luxury-shadow">
                 <img
                   src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=800"
                   alt="Luxury perfume bottle with gold accents"
@@ -136,22 +136,16 @@ export default function Home() {
       {/* Featured Products Section */}
       <section id="products" className="py-20 bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-gold mb-4">Our Collection</h2>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-playfair font-bold text-gold mb-4">Our Collection</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Discover our premium selection of fragrances crafted for the discerning individual
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-            {featuredProducts.map((product, index) => (
-              <div 
-                key={product.id} 
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <ProductCard product={product} />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
@@ -172,39 +166,37 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-gold mb-4 sm:mb-6">The Art of Fragrance</h2>
-              <p className="text-base sm:text-lg text-gray-300 mb-4 sm:mb-6 leading-relaxed">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-playfair font-bold text-gold mb-6">The Art of Fragrance</h2>
+              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                 Since our inception, Avancé Apparel has been dedicated to crafting exceptional fragrances that tell stories, evoke emotions, and create lasting memories. Each bottle in our collection represents months of careful formulation and attention to detail.
               </p>
-              <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                 Based in Bangladesh, we combine traditional perfumery techniques with modern innovation to create scents that are both timeless and contemporary. Our commitment to quality and luxury is evident in every product we create.
               </p>
-              <div className="grid grid-cols-3 gap-4 sm:gap-8">
+              <div className="grid grid-cols-3 gap-8">
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-gold mb-1 sm:mb-2">50+</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Unique Fragrances</div>
+                  <div className="text-3xl font-bold text-gold mb-2">50+</div>
+                  <div className="text-gray-400">Unique Fragrances</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-gold mb-1 sm:mb-2">10K+</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Happy Customers</div>
+                  <div className="text-3xl font-bold text-gold mb-2">10K+</div>
+                  <div className="text-gray-400">Happy Customers</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-gold mb-1 sm:mb-2">5+</div>
-                  <div className="text-xs sm:text-sm text-gray-400">Years Excellence</div>
+                  <div className="text-3xl font-bold text-gold mb-2">5+</div>
+                  <div className="text-gray-400">Years Excellence</div>
                 </div>
               </div>
             </div>
-            <div className="relative mt-8 lg:mt-0">
-              <div className="max-w-md mx-auto lg:max-w-none">
-                <img
-                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=800"
-                  alt="Artisan perfumer creating luxury fragrances"
-                  className="w-full h-auto rounded-2xl luxury-shadow"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent rounded-2xl"></div>
-              </div>
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=800"
+                alt="Artisan perfumer creating luxury fragrances"
+                className="w-full h-auto rounded-2xl luxury-shadow"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent rounded-2xl"></div>
             </div>
           </div>
         </div>
@@ -220,41 +212,41 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <div className="text-center lg:text-left">
-              <h3 className="text-xl sm:text-2xl font-playfair font-bold text-gold mb-4 sm:mb-6">Contact Information</h3>
-              <div className="space-y-4 sm:space-y-6">
-                <div className="flex items-center space-x-4 justify-center lg:justify-start">
-                  <div className="bg-gold p-3 rounded-full flex-shrink-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-playfair font-bold text-gold mb-6">Contact Information</h3>
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="bg-gold p-3 rounded-full">
                     <i className="fas fa-map-marker-alt text-black"></i>
                   </div>
-                  <div className="text-left">
-                    <p className="font-semibold text-sm sm:text-base">Address</p>
-                    <p className="text-gray-300 text-sm sm:text-base">Dhanmondi, Dhaka, Bangladesh</p>
+                  <div>
+                    <p className="font-semibold">Address</p>
+                    <p className="text-gray-300">Dhanmondi, Dhaka, Bangladesh</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4 justify-center lg:justify-start">
-                  <div className="bg-gold p-3 rounded-full flex-shrink-0">
+                <div className="flex items-center space-x-4">
+                  <div className="bg-gold p-3 rounded-full">
                     <i className="fas fa-phone text-black"></i>
                   </div>
-                  <div className="text-left">
-                    <p className="font-semibold text-sm sm:text-base">Phone</p>
-                    <p className="text-gray-300 text-sm sm:text-base">+880 1234 567890</p>
+                  <div>
+                    <p className="font-semibold">Phone</p>
+                    <p className="text-gray-300">+880 1234 567890</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4 justify-center lg:justify-start">
-                  <div className="bg-gold p-3 rounded-full flex-shrink-0">
+                <div className="flex items-center space-x-4">
+                  <div className="bg-gold p-3 rounded-full">
                     <i className="fas fa-envelope text-black"></i>
                   </div>
-                  <div className="text-left">
-                    <p className="font-semibold text-sm sm:text-base">Email</p>
-                    <p className="text-gray-300 text-sm sm:text-base">info@avanceapparel.com</p>
+                  <div>
+                    <p className="font-semibold">Email</p>
+                    <p className="text-gray-300">info@avanceapparel.com</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <form onSubmit={form.handleSubmit(onSubmit)} className="card-luxury p-4 sm:p-6 lg:p-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="card-luxury p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">

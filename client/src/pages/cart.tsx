@@ -32,9 +32,9 @@ export default function Cart() {
           </div>
 
           {/* Header */}
-          <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-gold mb-2 sm:mb-4">Shopping Cart</h1>
-            <p className="text-sm sm:text-base text-gray-300">
+          <div className="mb-8">
+            <h1 className="text-4xl font-playfair font-bold text-gold mb-4">Shopping Cart</h1>
+            <p className="text-gray-300">
               {items.length} {items.length === 1 ? 'item' : 'items'} in your cart
             </p>
           </div>
@@ -60,39 +60,39 @@ export default function Cart() {
               <div className="lg:col-span-2 space-y-4">
                 {items.map((item) => (
                   <Card key={item.product.id} className="card-luxury">
-                    <CardContent className="p-4 sm:p-6">
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 lg:space-x-6">
-                        <div className="relative flex-shrink-0">
+                    <CardContent className="p-6">
+                      <div className="flex items-center space-x-6">
+                        <div className="relative">
                           <img
                             src={item.product.imageUrl}
                             alt={item.product.name}
-                            className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg"
+                            className="w-24 h-24 object-cover rounded-lg"
                           />
                           {item.product.stock < 5 && item.product.stock > 0 && (
-                            <Badge variant="destructive" className="absolute -top-2 -right-2 text-xs">
+                            <Badge variant="destructive" className="absolute -top-2 -right-2">
                               Low Stock
                             </Badge>
                           )}
                         </div>
                         
-                        <div className="flex-1 w-full sm:w-auto">
-                          <h3 className="text-lg sm:text-xl font-playfair font-semibold text-foreground mb-2">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-playfair font-semibold text-foreground mb-2">
                             {item.product.name}
                           </h3>
-                          <p className="text-gray-400 text-xs sm:text-sm mb-2 line-clamp-2">
+                          <p className="text-gray-400 text-sm mb-2">
                             {item.product.description}
                           </p>
-                          <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                            <Badge variant="outline" className="border-gold text-gold w-fit">
+                          <div className="flex items-center space-x-4">
+                            <Badge variant="outline" className="border-gold text-gold">
                               {item.product.category}
                             </Badge>
-                            <span className="text-gold font-bold text-sm sm:text-base">
+                            <span className="text-gold font-bold">
                               {formatPrice(item.product.price)}
                             </span>
                           </div>
                         </div>
                         
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                        <div className="flex items-center space-x-4">
                           <div className="flex items-center space-x-2">
                             <Button
                               variant="outline"
@@ -100,9 +100,9 @@ export default function Cart() {
                               onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                               className="h-8 w-8 border-border"
                             >
-                              <Minus className="h-3 w-3 sm:h-4 sm:w-4" />
+                              <Minus className="h-4 w-4" />
                             </Button>
-                            <span className="w-8 sm:w-12 text-center font-medium text-sm sm:text-base">
+                            <span className="w-12 text-center font-medium">
                               {item.quantity}
                             </span>
                             <Button
@@ -111,21 +111,21 @@ export default function Cart() {
                               onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                               className="h-8 w-8 border-border"
                             >
-                              <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
+                              <Plus className="h-4 w-4" />
                             </Button>
                           </div>
                           
-                          <div className="text-left sm:text-right flex sm:block justify-between w-full sm:w-auto">
-                            <div className="text-lg sm:text-xl font-bold text-gold">
+                          <div className="text-right">
+                            <div className="text-xl font-bold text-gold">
                               {formatPrice(Number(item.product.price) * item.quantity)}
                             </div>
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => removeItem(item.product.id)}
-                              className="text-red-400 hover:text-red-300 text-xs sm:text-sm p-1 sm:p-2"
+                              className="text-red-400 hover:text-red-300"
                             >
-                              <X className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                              <X className="h-4 w-4 mr-1" />
                               Remove
                             </Button>
                           </div>

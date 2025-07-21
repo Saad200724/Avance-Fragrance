@@ -1,29 +1,15 @@
-import mongoose from 'mongoose';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import ws from "ws";
+import * as schema from "@shared/schema";
 
-if (!process.env.MONGODB_URI) {
+neonConfig.webSocketConstructor = ws;
+
+if (!process.env.DATABASE_URL) {
   throw new Error(
-    "MONGODB_URI must be set. Please provide your MongoDB Atlas connection string.",
+    "DATABASE_URL must be set. Did you forget to provision a database?",
   );
 }
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI!, {
-      serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 45000,
-      maxPoolSize: 10,
-      minPoolSize: 5,
-      maxIdleTimeMS: 30000,
-      retryWrites: true,
-    });
-    console.log('MongoDB Atlas connected successfully');
-    return true;
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    console.log('Note: You may need to whitelist Replit\'s IP addresses in MongoDB Atlas Network Access settings.');
-    console.log('Continuing without database connection for development...');
-    return false;
-  }
-};
-
-export { connectDB };
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const db = drizzle({ client: pool, schema });

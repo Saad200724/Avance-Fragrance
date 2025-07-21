@@ -23,12 +23,12 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/products/${product.id}`}>
-      <Card className="card-luxury group cursor-pointer transform hover:scale-105 transition-all duration-300 animate-fade-in-up">
-        <div className="relative overflow-hidden rounded-t-lg">
+      <Card className="card-luxury group cursor-pointer">
+        <div className="relative overflow-hidden">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-64 object-cover product-card-hover"
           />
           <div className="absolute top-4 left-4">
             {product.stock < 5 && product.stock > 0 && (

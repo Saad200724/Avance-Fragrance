@@ -16,10 +16,10 @@ Avancé Apparel is a luxury fragrance e-commerce platform built with modern web 
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express.js
-- **Database**: MongoDB Atlas with Mongoose ODM
-- **Authentication**: Supabase Auth with real-time session management
+- **Database**: PostgreSQL with Drizzle ORM
+- **Database Connection**: Neon serverless PostgreSQL
 - **API**: RESTful API with JSON responses
-- **Session Management**: Supabase session handling
+- **Session Management**: Express sessions with PostgreSQL store
 
 ### Design System
 - **Theme**: Dark luxury aesthetic with gold accents
@@ -105,26 +105,9 @@ Avancé Apparel is a luxury fragrance e-commerce platform built with modern web 
 - Database migrations through Drizzle Kit
 - Replit-specific development features
 
-## Recent Changes
-
-- July 6, 2025: Successfully completed migration and optimization
-  - Fixed MongoDB Atlas connection with proper configuration and IP whitelisting
-  - Optimized database queries with lean() and proper error handling
-  - Added performance middleware (compression, helmet) for security and speed
-  - Fixed ObjectId handling for proper MongoDB operations
-  - Enhanced admin panel functionality with working CRUD operations
-  - Application running smoothly on port 5000 with full database connectivity
-  - Added About and Contact pages with professional content and forms
-  - Implemented Supabase authentication integration
-  - Created 21 diverse dummy products across multiple fragrance categories
-  - Updated authentication system to use real Supabase auth instead of mock implementation
-  - Admin credentials accessible via login/signup forms instead of navbar
-
 ## Changelog
 
-- July 04, 2025: Initial setup
-- January 5, 2025: Migration to Replit started  
-- July 6, 2025: Migration completed with full optimization
+- July 04, 2025. Initial setup
 
 ## User Preferences
 

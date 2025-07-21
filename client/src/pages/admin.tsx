@@ -1,25 +1,9 @@
 import { Users, Package, ShoppingCart, TrendingUp, Settings, LogOut } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "wouter";
-import { useEffect } from "react";
+import { Link } from "wouter";
 
 export default function Admin() {
-  const [, setLocation] = useLocation();
-
-  useEffect(() => {
-    // Check if admin is authenticated
-    const adminAuth = localStorage.getItem("adminAuth");
-    if (!adminAuth || adminAuth !== "true") {
-      setLocation("/admin-login");
-    }
-  }, [setLocation]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("adminAuth");
-    setLocation("/");
-  };
-
   const adminFeatures = [
     {
       icon: TrendingUp,
@@ -67,16 +51,9 @@ export default function Admin() {
               <h1 className="text-xl font-semibold text-foreground">Admin Panel</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <Button 
-                variant="outline" 
-                className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-                onClick={handleLogout}
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Admin Logout
-              </Button>
               <Link href="/">
                 <Button variant="outline" className="border-gold text-gold hover:bg-gold hover:text-black">
+                  <LogOut className="h-4 w-4 mr-2" />
                   Back to Site
                 </Button>
               </Link>

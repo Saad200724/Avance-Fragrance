@@ -166,9 +166,9 @@ export default function Checkout() {
           </div>
 
           {/* Header */}
-          <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-playfair font-bold text-gold mb-2 sm:mb-4">Checkout</h1>
-            <p className="text-sm sm:text-base text-gray-300">Complete your order</p>
+          <div className="mb-8">
+            <h1 className="text-4xl font-playfair font-bold text-gold mb-4">Checkout</h1>
+            <p className="text-gray-300">Complete your order</p>
           </div>
 
           <form onSubmit={form.handleSubmit(onSubmit)}>

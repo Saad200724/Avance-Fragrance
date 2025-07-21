@@ -5,30 +5,30 @@ import { Link } from "wouter";
 
 export function Footer() {
   return (
-    <footer className="bg-background py-8 sm:py-12 border-t border-border">
+    <footer className="bg-background py-12 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          <div className="text-center sm:text-left">
-            <div className="text-xl sm:text-2xl font-playfair font-bold text-gold mb-3 sm:mb-4">Avancé</div>
-            <p className="text-luxury-muted mb-4 text-sm sm:text-base">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div className="text-2xl font-playfair font-bold text-gold mb-4">Avancé</div>
+            <p className="text-luxury-muted mb-4">
               Crafting exceptional fragrances for the discerning individual.
             </p>
-            <div className="flex space-x-3 sm:space-x-4 justify-center sm:justify-start">
-              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gold h-8 w-8 sm:h-10 sm:w-10">
-                <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+            <div className="flex space-x-4">
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gold">
+                <Facebook className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gold h-8 w-8 sm:h-10 sm:w-10">
-                <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gold">
+                <Instagram className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gold h-8 w-8 sm:h-10 sm:w-10">
-                <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gold">
+                <Twitter className="h-5 w-5" />
               </Button>
             </div>
           </div>
           
-          <div className="text-center sm:text-left">
-            <h4 className="font-semibold text-gold mb-3 sm:mb-4 text-sm sm:text-base">Quick Links</h4>
-            <ul className="space-y-1 sm:space-y-2 text-luxury-muted text-sm sm:text-base">
+          <div>
+            <h4 className="font-semibold text-gold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-luxury-muted">
               <li>
                 <Link href="/">
                   <span className="hover:text-gold transition-colors cursor-pointer">Home</span>
@@ -48,9 +48,9 @@ export function Footer() {
             </ul>
           </div>
           
-          <div className="text-center sm:text-left">
-            <h4 className="font-semibold text-gold mb-3 sm:mb-4 text-sm sm:text-base">Categories</h4>
-            <ul className="space-y-1 sm:space-y-2 text-luxury-muted text-sm sm:text-base">
+          <div>
+            <h4 className="font-semibold text-gold mb-4">Categories</h4>
+            <ul className="space-y-2 text-luxury-muted">
               <li>
                 <Link href="/products?category=men">
                   <span className="hover:text-gold transition-colors cursor-pointer">Men's Fragrances</span>
@@ -74,19 +74,18 @@ export function Footer() {
             </ul>
           </div>
           
-          <div className="text-center sm:text-left lg:col-span-1 sm:col-span-2 lg:col-span-1">
-            <h4 className="font-semibold text-gold mb-3 sm:mb-4 text-sm sm:text-base">Newsletter</h4>
-            <p className="text-luxury-muted mb-4 text-sm sm:text-base">
+          <div>
+            <h4 className="font-semibold text-gold mb-4">Newsletter</h4>
+            <p className="text-luxury-muted mb-4">
               Stay updated with our latest fragrances and offers.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
+            <div className="flex">
               <Input
                 placeholder="Your email"
-                className="flex-1 sm:rounded-r-none bg-secondary border-border text-sm"
+                className="flex-1 rounded-r-none bg-secondary border-border"
               />
-              <Button className="sm:rounded-l-none bg-gold text-black hover:bg-gold/90 text-sm">
-                <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="ml-1 sm:hidden">Subscribe</span>
+              <Button className="rounded-l-none bg-gold text-black hover:bg-gold/90">
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
           </div>

@@ -33,7 +33,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/products/:id", async (req, res) => {
     try {
-      const id = req.params.id; // Use string ID for MongoDB
+      const id = parseInt(req.params.id);
       const product = await storage.getProductById(id);
       
       if (!product) {
@@ -63,7 +63,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.put("/api/products/:id", async (req, res) => {
     try {
-      const id = req.params.id; // Use string ID for MongoDB
+      const id = parseInt(req.params.id);
       const productData = insertProductSchema.partial().parse(req.body);
       const product = await storage.updateProduct(id, productData);
       
@@ -83,7 +83,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.delete("/api/products/:id", async (req, res) => {
     try {
-      const id = req.params.id; // Use string ID for MongoDB
+      const id = parseInt(req.params.id);
       const success = await storage.deleteProduct(id);
       
       if (!success) {
@@ -167,21 +167,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/orders", async (req, res) => {
     try {
-      // Custom schema for MongoDB that accepts string IDs
       const createOrderSchema = z.object({
-        order: z.object({
-          customerName: z.string(),
-          customerEmail: z.string().email(),
-          customerPhone: z.string().optional(),
-          shippingAddress: z.string(),
-          totalAmount: z.string(),
-          status: z.string().default("pending"),
-        }),
-        items: z.array(z.object({
-          productId: z.string(), // Accept string ID for MongoDB
-          quantity: z.number().positive(),
-          price: z.string(),
-        })),
+        order: insertOrderSchema,
+        items: z.array(insertOrderItemSchema),
       });
       
       const { order: orderData, items } = createOrderSchema.parse(req.body);

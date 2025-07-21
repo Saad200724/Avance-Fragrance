@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { authService } from "@/lib/supabase";
 import { Customer } from "@shared/schema";
 
 interface AuthContextType {
@@ -7,7 +6,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (userData: { firstName: string; lastName: string; email: string; password: string; phone?: string }) => Promise<void>;
-  logout: () => Promise<void>;
+  logout: () => void;
   isLoading: boolean;
 }
 
@@ -18,75 +17,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for Supabase session on mount
-    const initializeAuth = async () => {
-      try {
-        const { data } = await authService.getSession();
-        if (data.session?.user) {
-          const userProfile = {
-            id: data.session.user.id,
-            email: data.session.user.email || '',
-            firstName: data.session.user.user_metadata?.firstName || '',
-            lastName: data.session.user.user_metadata?.lastName || '',
-            phone: data.session.user.user_metadata?.phone || '',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          } as Customer;
-          setUser(userProfile);
-        }
-      } catch (error) {
-        console.error('Auth initialization error:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    initializeAuth();
-
-    // Listen for auth changes
-    const { data: { subscription } } = authService.onAuthStateChange(
-      async (event, session) => {
-        if (event === 'SIGNED_IN' && session?.user) {
-          const userProfile = {
-            id: session.user.id,
-            email: session.user.email || '',
-            firstName: session.user.user_metadata?.firstName || '',
-            lastName: session.user.user_metadata?.lastName || '',
-            phone: session.user.user_metadata?.phone || '',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          } as Customer;
-          setUser(userProfile);
-        } else if (event === 'SIGNED_OUT') {
-          setUser(null);
-        }
-      }
-    );
-
-    return () => subscription.unsubscribe();
+    // Check for stored user on mount
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setIsLoading(false);
   }, []);
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const { data, error } = await authService.signIn(email, password);
-      
-      if (error) {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
         throw new Error(error.message || "Login failed");
       }
 
-      if (data.user) {
-        const userProfile = {
-          id: data.user.id,
-          email: data.user.email || '',
-          firstName: data.user.user_metadata?.firstName || '',
-          lastName: data.user.user_metadata?.lastName || '',
-          phone: data.user.user_metadata?.phone || '',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        } as Customer;
-        setUser(userProfile);
-      }
+      const userData = await response.json();
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
     } catch (error) {
       throw error;
     } finally {
@@ -103,24 +60,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }) => {
     setIsLoading(true);
     try {
-      const { data, error } = await authService.signUp(userData.email, userData.password, userData);
-      
-      if (error) {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
         throw new Error(error.message || "Signup failed");
       }
 
-      if (data.user) {
-        const userProfile = {
-          id: data.user.id,
-          email: data.user.email || '',
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          phone: userData.phone || '',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        } as Customer;
-        setUser(userProfile);
-      }
+      const newUser = await response.json();
+      setUser(newUser);
+      localStorage.setItem("user", JSON.stringify(newUser));
     } catch (error) {
       throw error;
     } finally {
@@ -128,15 +83,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout = async () => {
-    try {
-      await authService.signOut();
-      setUser(null);
-    } catch (error) {
-      console.error('Logout error:', error);
-      // Still clear user state even if signOut fails
-      setUser(null);
-    }
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
   const value = {
